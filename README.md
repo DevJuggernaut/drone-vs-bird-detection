@@ -48,6 +48,14 @@ Main libraries:
 - scikit-learn
 - Kaggle Hub
 
+## Model Download
+
+Since the trained model file (45 MB) exceeds GitHub's file size limit (25 MB), you can download it from:
+
+- **Google Drive**: [Download drone_vs_bird_model.pth](https://drive.google.com/file/d/1TGsCjLdJeXdiPgViaTr0r5Wg1s4t8O71/view?usp=sharing)
+
+To use the model, download the file and place it in the project root directory before running the inference code.
+
 ## Installation and Usage
 
 1. Clone the repository:
@@ -61,12 +69,14 @@ cd drone-vs-bird-detection
 pip install torch torchvision opencv-python matplotlib scikit-learn kagglehub
 ```
 
-3. Run the Jupyter notebook to see the full project:
+3. Download the model from the Google Drive link above
+
+4. Run the Jupyter notebook to see the full project:
 ```
 jupyter notebook drone_vs_bird_detection.ipynb
 ```
 
-4. To use the trained model for inference:
+5. To use the trained model for inference:
 
 ```python
 import torch
@@ -122,3 +132,11 @@ prediction, probs = classify_image(image_path)
 print(f"Prediction: {prediction}")
 print(f"Probability - Bird: {probs[0]:.4f}, Drone: {probs[1]:.4f}")
 ```
+
+## Alternative: Training the Model Yourself
+
+If you prefer to train the model yourself:
+
+1. Run the complete notebook which will download the dataset and train the model
+2. The trained model will be saved as 'drone_vs_bird_model.pth' in your working directory
+3. You can then use this file for inference using the code provided above
