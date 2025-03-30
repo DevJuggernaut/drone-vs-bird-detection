@@ -55,7 +55,7 @@ All images were resized to 224×224 pixels and augmented with techniques such as
 
 Since the trained model file (45 MB) exceeds GitHub's file size limit (25 MB), you can download it from:
 
-- **Google Drive**: [Download drone_vs_bird_model.pth](https://drive.google.com/file/d/1TGsCjLdJeXdiPgViaTr0r5Wg1s4t8O71/view?usp=sharing)
+- **Google Drive**: [Download drone_vs_bird_model.pth](https://drive.google.com/file/d/1It2Ms1KrqLJ8O24J8R-VREit_ZCYfybI/view?usp=sharing)
 
 To use the model, download the file and place it in the project root directory before running the inference code.
 
