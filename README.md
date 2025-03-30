@@ -8,7 +8,7 @@ This project demonstrates the development of a deep learning model to distinguis
 
 ### Features
 - Transfer learning with ResNet-18 architecture
-- Achieving 99.39% accuracy on the test set
+- Achieving 99.15% accuracy on the test set
 - Complete development cycle: from data processing to model deployment
 
 ## Dataset
@@ -16,37 +16,40 @@ This project demonstrates the development of a deep learning model to distinguis
 The project uses the "Drone vs Bird" dataset from Kaggle, which contains:
 - 2499 drone images
 - 1607 bird images
-- Various backgrounds and shooting conditions
+- Total of 4106 images with various backgrounds and shooting conditions
+
+Drone images are generally larger (ranging from 752×480 to 3024×4032 pixels) compared to bird images (typically 224×225 to 500×500 pixels).
+
+## Data Preparation
+
+The data was split into:
+- Training set: 2627 images (1599 drones, 1028 birds)
+- Validation set: 657 images (400 drones, 257 birds)
+- Test set: 822 images (500 drones, 322 birds)
+
+All images were resized to 224×224 pixels and augmented with techniques such as random horizontal flips, rotations, and color jitter to improve model generalization.
+
+## Model Architecture
+
+- Base model: ResNet-18 (pretrained on ImageNet)
+- Modified with custom classification head:
+  - Linear layer (512 neurons)
+  - ReLU activation
+  - Dropout (0.2)
+  - Output layer (2 classes)
+- Training approach: Freeze early layers, fine-tune later layers
 
 ## Results
 
-- **Accuracy**: 99.39%
-- **F1-score**: 0.9939
-- **AUC**: 0.9993
+- **Accuracy**: 99.15%
+- **Precision**: 98.98%
+- **Recall**: 99.24%
+- **F1-score**: 99.11%
+- **AUC**: 0.9995
 - **Confusion Matrix**:
-  - 322/322 birds classified correctly
-  - 495/500 drones classified correctly
-
-## Project Structure
-
-This project is organized as a single Python notebook containing all the steps:
-
-1. **Environment Setup & Data Loading**: Installing required libraries and downloading data
-2. **Data Exploration**: Analyzing dataset structure and image characteristics
-3. **Data Preparation**: Creating datasets with transformations and splitting into train/val/test sets
-4. **Model Creation & Training**: Implementing transfer learning with ResNet-18
-5. **Evaluation**: Testing the model and visualizing results
-
-## Required Libraries
-
-Main libraries:
-- PyTorch
-- Torchvision
-- OpenCV
-- NumPy
-- Matplotlib
-- scikit-learn
-- Kaggle Hub
+  - 321/322 birds classified correctly (99.69% recall)
+  - 494/500 drones classified correctly (98.80% recall)
+  - Only 7 misclassifications out of 822 test images
 
 ## Model Download
 
@@ -127,7 +130,7 @@ def classify_image(image_path):
     return class_names[predicted.item()], probabilities[0].cpu().numpy()
 
 # Example usage
-image_path = "your_image.jpg"
+image_path = "path_to_your_image.jpg"
 prediction, probs = classify_image(image_path)
 print(f"Prediction: {prediction}")
 print(f"Probability - Bird: {probs[0]:.4f}, Drone: {probs[1]:.4f}")
